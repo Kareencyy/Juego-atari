@@ -174,7 +174,7 @@ window.addEventListener('resize', () => {
   createBricks();
 });
 
-// 🎵 Música control
+//  Música control
 const bgMusic = document.getElementById('audiopou');
 const musicToggle = document.getElementById('musicToggle');
 let musicPlaying = false;
@@ -191,19 +191,18 @@ function startMusicOnce() {
 window.addEventListener('click', startMusicOnce);
 window.addEventListener('touchstart', startMusicOnce);
 
-musicToggle.addEventListener('click', (e) => {
-  e.stopPropagation();
-  if (bgMusic.paused) {
+  musicToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (bgMusic.paused) {
+      bgMusic.play();
+      musicToggle.textContent = '🔊';
+    } else {
+      bgMusic.pause();
+      musicToggle.textContent = '🔇';
+    }
+  });
+  document.getElementById('startBtn').addEventListener('click', () => {
+    document.getElementById('startScreen').style.display = 'none';
     bgMusic.play();
-    musicToggle.textContent = '🔊';
-  } else {
-    bgMusic.pause();
-    musicToggle.textContent = '🔇';
-  }
-});
-document.getElementById('startBtn').addEventListener('click', () => {
-  document.getElementById('startScreen').style.display = 'none';
-  bgMusic.play();
-  gameLoop(); // Si quieres que el loop arranque aquí
-});
-
+    gameLoop(); 
+  });

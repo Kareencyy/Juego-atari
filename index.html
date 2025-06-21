@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Atari Breaker Modern-Retro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main>
+    <section id="startScreen">
+      <h1>Atari Breaker Modern-Retro</h1>
+      <button id="startBtn" role="button" aria-label="Empezar el juego">EMPEZAR</button>
+      <button id="musicToggle" role="button" aria-label="Activar o desactivar música">🔇</button>
+    </section>
+
+    <section id="gameScreen" style="display:none;">
+      <canvas id="gameCanvas" width="480" height="320" aria-hidden="true"></canvas>
+      <div id="uiControls">
+        <button id="pauseBtn" role="button" aria-label="Pausar el juego">⏸</button>
+        <button id="restartBtn" role="button" aria-label="Reiniciar el juego">🔄</button>
+      </div>
+    </section>
+
+    <audio id="bgMusic" loop>
+      <source src="pou.mp3." type="audio/mpeg">
+      <source src="music/background.ogg" type="audio/ogg">
+      Tu navegador no soporta el elemento de audio.
+    </audio>
+  </main>
+</body>
+</html>

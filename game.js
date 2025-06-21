@@ -1,14 +1,6 @@
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
-const startBtn = document.getElementById("startBtn");
-const musicToggle = document.getElementById("musicToggle");
-const pauseBtn = document.getElementById("pauseBtn");
-const restartBtn = document.getElementById("restartBtn");
-const bgMusic = document.getElementById("bgMusic");
-
-let gameInterval;
-let isPaused = false;
 let score = 0;
 let level = 1;
 let bricks = [];
@@ -103,9 +95,6 @@ function moveBalls() {
   });
 
   balls = balls.filter(ball => ball.y - ball.radius < canvas.height);
-  if (balls.length === 0) {
-    resetGame();
-  }
 }
 
 function drawScore() {
@@ -116,7 +105,6 @@ function drawScore() {
 }
 
 function loop() {
-  if (isPaused) return;
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   drawPaddle();
   drawBricks();
@@ -124,75 +112,5 @@ function loop() {
   drawScore();
   moveBalls();
 
-  if (bricks.every(b => !b.alive)) {
-    level++;
-    createBricks(level);
-    createBall(canvas.width / 2, canvas.height / 2, 2, -2);
-  }
-
   requestAnimationFrame(loop);
 }
-
-function resetGame() {
-  score = 0;
-  level = 1;
-  createBricks(level);
-  balls = [];
-  createBall(canvas.width / 2, canvas.height / 2, 2, -2);
-  saveProgress();
-}
-
-function saveProgress() {
-  localStorage.setItem("breakerScore", score);
-  localStorage.setItem("breakerLevel", level);
-}
-
-function loadProgress() {
-  score = parseInt(localStorage.getItem("breakerScore")) || 0;
-  level = parseInt(localStorage.getItem("breakerLevel")) || 1;
-}
-
-canvas.addEventListener("mousemove", e => {
-  const rect = canvas.getBoundingClientRect();
-  const mouseX = e.clientX - rect.left;
-  paddle.x = mouseX - paddle.width / 2;
-});
-
-canvas.addEventListener("touchmove", e => {
-  const rect = canvas.getBoundingClientRect();
-  const touchX = e.touches[0].clientX - rect.left;
-  paddle.x = touchX - paddle.width / 2;
-  e.preventDefault();
-}, { passive: false });
-
-startBtn.addEventListener("click", () => {
-  document.getElementById("startScreen").style.display = "none";
-  document.getElementById("gameScreen").style.display = "block";
-  bgMusic.play();
-  loadProgress();
-  createBricks(level);
-  createBall(canvas.width / 2, canvas.height / 2, 2, -2);
-  loop();
-});
-
-musicToggle.addEventListener("click", () => {
-  if (bgMusic.paused) {
-    bgMusic.play();
-    musicToggle.textContent = "🔊";
-  } else {
-    bgMusic.pause();
-    musicToggle.textContent = "🔇";
-  }
-});
-
-pauseBtn.addEventListener("click", () => {
-  isPaused = !isPaused;
-  if (!isPaused) loop();
-});
-
-restartBtn.addEventListener("click", () => {
-  resetGame();
-  if (bgMusic.paused) bgMusic.play();
-  isPaused = false;
-  loop();
-});

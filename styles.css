@@ -1,70 +1,23 @@
-body {
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
+
+html, body {
   margin: 0;
   padding: 0;
-  font-family: 'Press Start 2P', cursive;
-  background: black;
-  color: #0ff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-main {
-  text-align: center;
-}
-
-h1 {
-  font-size: 1.2rem;
-  margin-bottom: 20px;
-  color: #f0f;
-  text-shadow: 0 0 10px #f0f, 0 0 20px #0ff;
-}
-
-button {
-  background: transparent;
-  border: 2px solid #0ff;
-  color: #0ff;
-  padding: 10px 20px;
-  margin: 5px;
-  font-size: 0.6rem;
-  cursor: pointer;
-  border-radius: 5px;
-  text-shadow: 0 0 5px #0ff;
-  transition: all 0.2s ease-in-out;
-}
-
-button:hover {
-  background: rgba(0, 255, 255, 0.1);
-  transform: scale(1.1);
+  overflow: hidden;
+  background: #111;
+  font-family: 'Orbitron', sans-serif;
 }
 
 canvas {
-  background: black;
   display: block;
-  margin: 0 auto;
-  border: 2px solid #0ff;
-  box-shadow: 0 0 10px #0ff, 0 0 20px #f0f;
 }
 
-#uiControls {
-  margin-top: 10px;
-}
-
-#startScreen {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-@media (max-width: 600px) {
-  canvas {
-    width: 90vw;
-    height: auto;
-  }
-
-  button {
-    font-size: 0.5rem;
-    padding: 8px 16px;
-  }
+#score {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #0f0;
+  font-size: 1.5em;
+  z-index: 1;
 }
